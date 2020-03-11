@@ -1,0 +1,10 @@
+.delBtn {
+    display: inline-block;
+    border: none;
+    background-image: url("stop.svg");
+    background: no-repeat;
+    /*min-height: 12px;*/
+    /*min-width: 8px;*/
+    height: 1em;
+    width: 1em;
+}

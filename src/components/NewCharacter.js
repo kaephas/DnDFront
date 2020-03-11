@@ -23,9 +23,17 @@ const NewCharacter = (props) => {
         setClass(e.target.value);
     };
 
+    // useEffect((props) => {
+    //     fetch('https://dnd-chars.herokuapp.com/character')
+    //         .then(res => res.json())
+    //         .then(data => props.updateList(data))
+    //         .catch(console.log);
+    // }, []);
+
     const onSubmit = (e) => {
         e.preventDefault();
 
+        // props.updateList();
         // const formData = new FormData();
         // formData.append('name', name);
         // formData.append('race', race);
@@ -34,20 +42,28 @@ const NewCharacter = (props) => {
         // for (let prop in formData) {
         //     console.log("form prop: " + prop + " => " + formData[prop]);
         // }
-
-        fetch('https://dnd-chars.herokuapp.com/character', {
-            method: 'POST',
-            headers: { 'Content-Type': 'multipart/form-data'},
-            body: JSON.stringify({
-                name: charName,
-                race: charRace,
-                class: charClass
+        if(charName && charName !== '') {
+            fetch('https://dnd-chars.herokuapp.com/character', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name: charName,
+                    race: charRace,
+                    class: charClass
+                })
             })
-        })
+                .then(res => res.json())
+                .catch(console.log);
+        }
+
+        fetch('https://dnd-chars.herokuapp.com/character')
+            // fetch("http://localhost:5000/api/character")
+            //
             .then(res => res.json())
-            .catch(console.log)
+            .then(data => props.updateList(data))
+            .catch(console.log);
 
-
+        // props.updateList();
     };
 
     return(
@@ -61,20 +77,20 @@ const NewCharacter = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="race">Race</label>
-                    <select className="form-control" id="race" onChange={raceChange}>
+                    <select className="form-control" id="race" onChange={raceChange} defaultValue={"Dwarf"}>
                         {
                             races.map((race, index) => {
-                                return <option value={race}>{race}</option>
+                                return <option value={race} key={race}>{race}</option>
                             })
                         }
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="class">Class</label>
-                    <select className="form-control" id="class" onChange={classChange}>
+                    <select className="form-control" id="class" onChange={classChange} defaultValue={"Barbarian"}>
                         {
                             classes.map((charClass, index) => {
-                                return <option value={charClass}>{charClass}</option>
+                                return <option value={charClass} key={charClass}>{charClass}</option>
                             })
                         }
                     </select>
