@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 const NewCharacter = (props) => {
     const [charName, setName] = useState("");
-    const [charClass, setClass] = useState("");
-    const [charRace, setRace] = useState("");
+    const [charClass, setClass] = useState("Warlock");
+    const [charRace, setRace] = useState("Gnome");
 
     var classes = props.classes;
     var races = props.races;
@@ -63,12 +63,20 @@ const NewCharacter = (props) => {
             .then(data => props.updateList(data))
             .catch(console.log);
 
+        let nameBox = document.getElementById('name');
+        let raceBox = document.getElementById('race');
+        let classBox = document.getElementById('class');
+
+        nameBox.value = '';
+        raceBox.value = 'Gnome';
+        classBox.value = 'Warlock';
+
         // props.updateList();
     };
 
     return(
-        <div className="container">
-            <h1>New Character</h1>
+        <div className="container col-md-4 mx-auto">
+            <h2>New Character</h2>
             <form>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -77,7 +85,7 @@ const NewCharacter = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="race">Race</label>
-                    <select className="form-control" id="race" onChange={raceChange} defaultValue={"Dwarf"}>
+                    <select className="form-control" id="race" onChange={raceChange} defaultValue={"Gnome"}>
                         {
                             races.map((race, index) => {
                                 return <option value={race} key={race}>{race}</option>
@@ -87,15 +95,15 @@ const NewCharacter = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="class">Class</label>
-                    <select className="form-control" id="class" onChange={classChange} defaultValue={"Barbarian"}>
+                    <select className="form-control" id="class" onChange={classChange} defaultValue={"Warlock"}>
                         {
-                            classes.map((charClass, index) => {
-                                return <option value={charClass} key={charClass}>{charClass}</option>
+                            classes.map((chClass, index) => {
+                                return <option value={chClass} key={chClass}>{chClass}</option>
                             })
                         }
                     </select>
                 </div>
-                <button onClick={onSubmit}>Create Character</button>
+                <button className='btn btn-primary' onClick={onSubmit}>Create Character</button>
             </form>
         </div>
     )

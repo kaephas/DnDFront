@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './table.css';
 
 const CharactersTable = (props) => {
     var characterList = props.characterList;
 
-    useEffect(() => {
-        props.updateList();
-    }, []);
+    // useEffect(() => {
+    //     props.updateList();
+    // }, []);
 
     const rowClick = (e) => {
         let cell = e.target.parentNode;
@@ -58,7 +58,6 @@ const CharactersTable = (props) => {
                     // }
 
                 })}
-
 
                 </tbody>
             </table>

@@ -6,10 +6,6 @@ import Footer from "./components/Footer";
 
 class App extends React.Component {
 
-    constructor() {
-        super();
-    }
-
     componentDidMount() {
 
         fetch('https://dnd-chars.herokuapp.com/character')
